@@ -63,7 +63,3 @@ h3 {
 h4 {
     text-transform: uppercase;
 }
-
-p:enabled {
-    padding-bottom: 2px;
-}
