@@ -63,10 +63,43 @@ $superheroes = [
   ], 
 ];
 
-?>
+$query = $_GET["query"];
 
-<ul>
-<?php foreach ($superheroes as $superhero): ?>
-  <li><?= $superhero['alias']; ?></li>
-<?php endforeach; ?>
-</ul>
+$name = array_search($query, array_column($superheroes,"name"));
+$alias = array_search($query, array_column($superheroes,"alias"));
+
+if ($query != "") {
+    if ($query !="" && $name !="") {
+        if (array_key_exists($name,$superheroes)) {
+            foreach($superheroes as $key => $value) {
+            if ($key == $name) {
+                ?>
+                <?php foreach ($value as $sub_key => $sub_value): ?>
+                    <p><?=$sub_value?></p>
+                <?php endforeach; ?>
+                <?php
+                } 
+            }
+        }
+    } else if ($query !="" && $alias !="") {
+        if (array_key_exists($alias,$superheroes)) {
+        foreach($superheroes as $key => $value) {
+            if ($key == $alias) {
+                ?>
+                <?php foreach ($value as $sub_key => $sub_value): ?>
+                    <p><?=$sub_value?></p>
+                <?php endforeach; ?> 
+                <?php
+                } 
+            }
+        }
+    }
+} else if ($query == "") { 
+    ?>
+    <ul>
+    <?php foreach ($superheroes as $superhero): ?>
+      <li><?= $superhero['alias']; ?></li>
+    <?php endforeach; ?>
+    </ul> 
+    <?php
+}
